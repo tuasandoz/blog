@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
-        return response()->json(['status' => true, 'message' =>  'Berhasil menambah kategori']);
+        return response()->json(['status' => true, 'message' =>  'Berhasil menambah categori']);
     }
 
     public function detail($id)
