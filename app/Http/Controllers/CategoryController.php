@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Resources\CategoryResource;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::with(['posts'])->get();
+        // $categories = Category::with(['posts'])->get();
 
-        return response()->json(['status' => true, 'data' => $categories]);
+        // return response()->json(['status' => true, 'data' => $categories]);
+        return CategoryResource::collection(Category::get());
     }
 
     public function store(Request $request)

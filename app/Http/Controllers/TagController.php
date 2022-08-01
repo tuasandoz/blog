@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Resources\TagResource;
 use Illuminate\Support\Facades\Validator;
 
 class TagController extends Controller
 {
     public function index()
     {
-        $tag = Tag::get();
+        // $tag = Tag::get();
 
-        return response()->json(['status' => true, 'data' => $tag]);
+        // return response()->json(['status' => true, 'data' => $tag]);
+
+        return TagResource::collection(Tag::get());
     }
 
     public function store(Request $request)

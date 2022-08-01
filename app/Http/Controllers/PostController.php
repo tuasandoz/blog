@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,9 +11,10 @@ class PostController extends Controller
 {
     public function index()
     {
-        $post = Post::with(['category', 'tags'])->get();
+        // $post = Post::with(['category', 'tags'])->get();
 
-        return response()->json(['status' => true, 'data' => $post]);
+        // return response()->json(['status' => true, 'data' => $post]);
+        return PostResource::collection(Post::with(['category', 'tags'])->get());
     }
 
     public function store(Request $request)
@@ -44,7 +46,8 @@ class PostController extends Controller
     public function detail($id)
     {
         $post = Post::with(['category', 'tags'])->where('id', $id)->first();
-        return response()->json(['status' => 'success', 'data' => $post]);
+        return new PostResource($post);
+        // return response()->json(['status' => 'success', 'data' => $post]);
     }
 
     public function update(Request $request, $id)
